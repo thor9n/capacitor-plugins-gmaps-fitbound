@@ -613,16 +613,14 @@ export class CapacitorGoogleMapsWeb
       });
     });
 
-    map.addListener(
-      'click',
-      (e: google.maps.MapMouseEvent | google.maps.IconMouseEvent) => {
-        this.notifyListeners('onMapClick', {
-          mapId: mapId,
-          latitude: e.latLng?.lat(),
-          longitude: e.latLng?.lng(),
-        });
-      },
-    );
+    map.addListener('click', (e: any) => {
+      this.notifyListeners('onMapClick', {
+        mapId: mapId,
+        latitude: e.latLng?.lat(),
+        longitude: e.latLng?.lng(),
+        placeId: e.placeId || null,
+      });
+    });
 
     this.notifyListeners('onMapReady', {
       mapId: mapId,

@@ -964,6 +964,16 @@ public class CapacitorGoogleMapsPlugin: CAPPlugin, GMSMapViewDelegate {
         ])
     }
 
+    // onPoiClick
+    public func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String, name: String, location: CLLocationCoordinate2D) {
+        self.notifyListeners("onMapClick", data: [
+            "mapId": self.findMapIdByMapView(mapView),
+            "placeId": placeID,
+            "latitude": location.latitude,
+            "longitude": location.longitude
+        ])
+    }
+
     // onPolygonClick, onPolylineClick, onCircleClick
     public func mapView(_ mapView: GMSMapView, didTap overlay: GMSOverlay) {
         if let polygon = overlay as? GMSPolygon {
